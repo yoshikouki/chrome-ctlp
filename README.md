@@ -11,7 +11,13 @@ A keyboard-first command palette for Chrome tab controls that extensions can acc
 
 The lazy-open command creates a lightweight extension-owned placeholder, keeps the target in its URL
 fragment, discards the placeholder, and navigates to the target only when the page becomes visible.
-The extension requests no Chrome permissions.
+
+The palette is injected into the active page only after the user clicks the extension or invokes its
+keyboard shortcut. It uses Chrome's temporary `activeTab` grant and does not request persistent site
+access. The in-page surface can therefore blur and reveal the current page behind it.
+
+Chrome does not allow extensions to inject into protected pages such as `chrome://` URLs, the Chrome
+Web Store, or other extensions' pages. Open a regular HTTP(S) page before invoking the palette.
 
 ## Development
 

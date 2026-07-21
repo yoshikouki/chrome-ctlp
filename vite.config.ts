@@ -7,8 +7,8 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
+        background: resolve(import.meta.dirname, "src/background.ts"),
         lazy: resolve(import.meta.dirname, "lazy.html"),
-        popup: resolve(import.meta.dirname, "popup.html"),
       },
       output: {
         assetFileNames: "assets/[name]-[hash][extname]",
