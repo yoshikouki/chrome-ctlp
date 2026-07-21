@@ -9,7 +9,14 @@ import IconStack2 from "@tabler/icons-react/dist/esm/icons/IconStack2.mjs";
 import IconX from "@tabler/icons-react/dist/esm/icons/IconX.mjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { type CommandId, filterCommands, looksLikeTarget, normalizeTarget } from "./lib/tabLogic";
+import { t, userErrorMessage } from "./lib/i18n";
+import {
+  type CommandId,
+  createCommands,
+  filterCommands,
+  looksLikeTarget,
+  normalizeTarget,
+} from "./lib/tabLogic";
 import styles from "./overlay.css?inline";
 
 const hostId = "chrome-ctlp-overlay-root";
@@ -29,11 +36,24 @@ const iconByCommand = {
   "wake-first": IconPlayerPlay,
 } as const;
 
+const commands = createCommands({
+  "lazy-open": t("commandLazyOpenLabel"),
+  "suspend-current": t("commandSuspendCurrentLabel"),
+  "suspend-others": t("commandSuspendOthersLabel"),
+  "wake-first": t("commandWakeFirstLabel"),
+});
+
 const metaByCommand: Record<CommandId, { detail: string; scope: string }> = {
-  "lazy-open": { detail: "選ぶまで読み込まない", scope: "LAZY TAB" },
-  "suspend-current": { detail: "タブを残してメモリを解放", scope: "CURRENT" },
-  "suspend-others": { detail: "固定・再生中のタブは除外", scope: "WINDOW" },
-  "wake-first": { detail: "最初の休止タブを復帰", scope: "SLEEPING" },
+  "lazy-open": { detail: t("commandLazyOpenDetail"), scope: t("commandLazyOpenScope") },
+  "suspend-current": {
+    detail: t("commandSuspendCurrentDetail"),
+    scope: t("commandSuspendCurrentScope"),
+  },
+  "suspend-others": {
+    detail: t("commandSuspendOthersDetail"),
+    scope: t("commandSuspendOthersScope"),
+  },
+  "wake-first": { detail: t("commandWakeFirstDetail"), scope: t("commandWakeFirstScope") },
 };
 
 function Palette({ close }: { close: () => void }): React.JSX.Element {
@@ -43,7 +63,7 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
   const [sleepingCount, setSleepingCount] = useState(0);
   const [status, setStatus] = useState("");
   const [busy, setBusy] = useState(false);
-  const visibleCommands = useMemo(() => filterCommands(input), [input]);
+  const visibleCommands = useMemo(() => filterCommands(input, commands), [input]);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -78,16 +98,16 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
         }
         const response = await sendRequest({ commandId, input, type: "execute" });
         if (!response.ok) {
-          throw new Error(response.error ?? "操作に失敗しました");
+          throw new Error(response.error ?? t("errorGeneric"));
         }
         setSleepingCount(response.sleepingCount);
-        setStatus(response.message ?? "完了しました");
+        setStatus(response.message ?? t("statusComplete"));
         if (commandId === "lazy-open") {
           setInput("");
           setSelectedIndex(0);
         }
       } catch (error) {
-        setStatus(error instanceof Error ? error.message : "操作に失敗しました");
+        setStatus(userErrorMessage(error));
       } finally {
         setBusy(false);
       }
@@ -123,13 +143,13 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
   return (
     <div className="chrome-ctlp-stage">
       <button
-        aria-label="パレットを閉じる"
+        aria-label={t("paletteCloseAriaLabel")}
         className="chrome-ctlp-backdrop"
         onClick={close}
         type="button"
       />
       <section
-        aria-label="chrome-ctlp command palette"
+        aria-label={t("paletteAriaLabel")}
         aria-modal="true"
         className="chrome-ctlp-panel"
         role="dialog"
@@ -137,7 +157,7 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
         <header className="chrome-ctlp-search">
           <IconSearch aria-hidden size={26} stroke={1.7} />
           <label>
-            <span className="chrome-ctlp-sr-only">コマンドまたはURLを検索</span>
+            <span className="chrome-ctlp-sr-only">{t("searchLabel")}</span>
             <input
               ref={inputRef}
               aria-describedby="chrome-ctlp-status"
@@ -146,14 +166,14 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
                 setSelectedIndex(0);
               }}
               onKeyDown={onKeyDown}
-              placeholder="コマンドまたはURLを検索..."
+              placeholder={t("searchPlaceholder")}
               spellCheck={false}
               value={input}
             />
           </label>
           {input ? (
             <button
-              aria-label="入力を消去"
+              aria-label={t("clearInputAriaLabel")}
               className="chrome-ctlp-icon-button"
               onClick={() => {
                 setInput("");
@@ -169,8 +189,12 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
           )}
         </header>
 
-        <div className="chrome-ctlp-section-label">Commands</div>
-        <div aria-label="コマンド" className="chrome-ctlp-commands" role="listbox">
+        <div className="chrome-ctlp-section-label">{t("commandsHeading")}</div>
+        <div
+          aria-label={t("commandsListAriaLabel")}
+          className="chrome-ctlp-commands"
+          role="listbox"
+        >
           {visibleCommands.length ? (
             visibleCommands.map((command, index) => {
               const selected = looksLikeTarget(input)
@@ -207,7 +231,7 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
               );
             })
           ) : (
-            <div className="chrome-ctlp-empty">一致するコマンドがありません</div>
+            <div className="chrome-ctlp-empty">{t("emptyResults")}</div>
           )}
         </div>
 
@@ -222,11 +246,11 @@ function Palette({ close }: { close: () => void }): React.JSX.Element {
           </span>
           <span className="chrome-ctlp-sleeping">
             <IconBrowser aria-hidden size={17} stroke={1.7} />
-            {sleepingCount} tabs sleeping
+            {t("footerSleepingCount", String(sleepingCount))}
           </span>
           <span className="chrome-ctlp-help">
-            実行 <kbd>↵</kbd>
-            閉じる <kbd>esc</kbd>
+            {t("footerRun")} <kbd>↵</kbd>
+            {t("footerClose")} <kbd>esc</kbd>
           </span>
         </footer>
       </section>

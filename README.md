@@ -19,6 +19,11 @@ access. The in-page surface can therefore blur and reveal the current page behin
 Chrome does not allow extensions to inject into protected pages such as `chrome://` URLs, the Chrome
 Web Store, or other extensions' pages. Open a regular HTTP(S) page before invoking the palette.
 
+## Languages
+
+The interface follows Chrome's UI language through the standard `chrome.i18n` API. English is the
+fallback locale, and Japanese is also included. Locale catalogs live in `public/_locales/<locale>/messages.json`.
+
 ## Development
 
 ```sh

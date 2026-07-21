@@ -6,33 +6,37 @@ export interface PaletteCommand {
   keywords: readonly string[];
 }
 
-export const commands: readonly PaletteCommand[] = [
-  {
-    id: "lazy-open",
-    label: "URLを遅延オープン",
-    keywords: ["url", "lazy", "open", "遅延", "開く"],
-  },
-  {
-    id: "suspend-current",
-    label: "現在のタブを休止",
-    keywords: ["discard", "suspend", "sleep", "現在", "休止"],
-  },
-  {
-    id: "suspend-others",
-    label: "他のタブを休止",
-    keywords: ["discard", "suspend", "sleep", "他", "休止"],
-  },
-  {
-    id: "wake-first",
-    label: "休止中のタブを開く",
-    keywords: ["wake", "resume", "sleep", "休止", "開く"],
-  },
-];
+export type TargetValidationErrorCode = "credentials" | "invalid" | "protocol" | "required";
+
+export class TargetValidationError extends Error {
+  readonly code: TargetValidationErrorCode;
+
+  constructor(code: TargetValidationErrorCode) {
+    super(code);
+    this.name = "TargetValidationError";
+    this.code = code;
+  }
+}
+
+const commandKeywords: Record<CommandId, readonly string[]> = {
+  "lazy-open": ["url", "lazy", "open", "遅延", "開く"],
+  "suspend-current": ["current", "discard", "suspend", "sleep", "現在", "休止"],
+  "suspend-others": ["others", "discard", "suspend", "sleep", "他", "休止"],
+  "wake-first": ["wake", "resume", "sleep", "休止", "開く"],
+};
+
+export function createCommands(labels: Record<CommandId, string>): readonly PaletteCommand[] {
+  return (Object.keys(commandKeywords) as CommandId[]).map((id) => ({
+    id,
+    keywords: commandKeywords[id],
+    label: labels[id],
+  }));
+}
 
 export function normalizeTarget(rawInput: string): URL {
   const input = rawInput.trim();
   if (!input) {
-    throw new Error("URLを入力してください");
+    throw new TargetValidationError("required");
   }
 
   const candidate = /^[a-z][a-z\d+.-]*:/iu.test(input) ? input : `https://${input}`;
@@ -40,14 +44,14 @@ export function normalizeTarget(rawInput: string): URL {
   try {
     url = new URL(candidate);
   } catch {
-    throw new Error("有効なURLを入力してください");
+    throw new TargetValidationError("invalid");
   }
 
   if (!(["http:", "https:"] as const).includes(url.protocol as "http:" | "https:")) {
-    throw new Error("http または https のURLだけを開けます");
+    throw new TargetValidationError("protocol");
   }
   if (url.username || url.password) {
-    throw new Error("認証情報を含むURLは開けません");
+    throw new TargetValidationError("credentials");
   }
 
   return url;
@@ -63,16 +67,17 @@ export function looksLikeTarget(input: string): boolean {
   );
 }
 
-export function filterCommands(input: string): readonly PaletteCommand[] {
-  const query = input.trim().toLocaleLowerCase("ja");
+export function filterCommands(
+  input: string,
+  commands: readonly PaletteCommand[],
+): readonly PaletteCommand[] {
+  const query = input.trim().toLocaleLowerCase();
   if (!query || looksLikeTarget(query)) {
     return commands;
   }
 
   return commands.filter((command) =>
-    [command.label, ...command.keywords].some((text) =>
-      text.toLocaleLowerCase("ja").includes(query),
-    ),
+    [command.label, ...command.keywords].some((text) => text.toLocaleLowerCase().includes(query)),
   );
 }
 

@@ -1,0 +1,68 @@
+{
+  "extensionName": { "message": "chrome-ctlp" },
+  "extensionDescription": {
+    "message": "A keyboard-first command palette for controlling Chrome tabs."
+  },
+  "actionOpenPalette": { "message": "Open chrome-ctlp" },
+  "commandOpenPaletteDescription": { "message": "Open chrome-ctlp" },
+  "paletteAriaLabel": { "message": "chrome-ctlp command palette" },
+  "paletteCloseAriaLabel": { "message": "Close palette" },
+  "searchLabel": { "message": "Search commands or URLs" },
+  "searchPlaceholder": { "message": "Search commands or URLs..." },
+  "clearInputAriaLabel": { "message": "Clear input" },
+  "commandsHeading": { "message": "Commands" },
+  "commandsListAriaLabel": { "message": "Commands" },
+  "commandLazyOpenLabel": { "message": "Lazy-open URL" },
+  "commandLazyOpenDetail": { "message": "Load only when selected" },
+  "commandLazyOpenScope": { "message": "Lazy tab" },
+  "commandSuspendCurrentLabel": { "message": "Suspend current tab" },
+  "commandSuspendCurrentDetail": { "message": "Keep the tab and release memory" },
+  "commandSuspendCurrentScope": { "message": "Current" },
+  "commandSuspendOthersLabel": { "message": "Suspend other tabs" },
+  "commandSuspendOthersDetail": { "message": "Skip pinned and audible tabs" },
+  "commandSuspendOthersScope": { "message": "Window" },
+  "commandWakeFirstLabel": { "message": "Open a sleeping tab" },
+  "commandWakeFirstDetail": { "message": "Wake the first sleeping tab" },
+  "commandWakeFirstScope": { "message": "Sleeping" },
+  "emptyResults": { "message": "No matching commands" },
+  "footerSleepingCount": {
+    "message": "Sleeping: $COUNT$ tabs",
+    "placeholders": {
+      "count": { "content": "$1", "example": "3" }
+    }
+  },
+  "footerRun": { "message": "Run" },
+  "footerClose": { "message": "Close" },
+  "statusComplete": { "message": "Done" },
+  "statusLazyOpened": {
+    "message": "Added $HOST$ as a sleeping tab",
+    "placeholders": {
+      "host": { "content": "$1", "example": "example.com" }
+    }
+  },
+  "statusCurrentSuspended": { "message": "Suspended the current tab" },
+  "statusOthersSuspended": {
+    "message": "Suspended tabs: $COUNT$",
+    "placeholders": {
+      "count": { "content": "$1", "example": "3" }
+    }
+  },
+  "statusWakeFirst": { "message": "Opened a sleeping tab" },
+  "errorGeneric": { "message": "The operation failed" },
+  "errorUrlRequired": { "message": "Enter a URL" },
+  "errorUrlInvalid": { "message": "Enter a valid URL" },
+  "errorUrlProtocol": { "message": "Only http and https URLs can be opened" },
+  "errorUrlCredentials": { "message": "URLs containing credentials cannot be opened" },
+  "errorTabCreate": { "message": "Could not create the tab" },
+  "errorTabDiscard": { "message": "Could not suspend the tab" },
+  "errorCurrentTabMissing": { "message": "Could not find the current tab" },
+  "errorNoSleepingTab": { "message": "There are no sleeping tabs" },
+  "lazyPrompt": { "message": "Select this tab to open it" },
+  "lazyFallbackHost": { "message": "Sleeping tab" },
+  "lazyTitle": {
+    "message": "Sleeping · $HOST$",
+    "placeholders": {
+      "host": { "content": "$1", "example": "example.com" }
+    }
+  }
+}

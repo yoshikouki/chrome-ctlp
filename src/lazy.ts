@@ -1,12 +1,18 @@
 import "./lazy.css";
+import { t } from "./lib/i18n";
 
-const host = new URLSearchParams(window.location.search).get("host") ?? "Sleeping tab";
+const host = new URLSearchParams(window.location.search).get("host") ?? t("lazyFallbackHost");
 const target = parseTarget(window.location.hash);
+document.documentElement.lang = chrome.i18n.getUILanguage();
+const promptElement = document.querySelector<HTMLParagraphElement>("#prompt");
+if (promptElement) {
+  promptElement.textContent = t("lazyPrompt");
+}
 const hostElement = document.querySelector<HTMLHeadingElement>("#host");
 if (hostElement) {
   hostElement.textContent = host;
 }
-document.title = `Sleeping · ${host}`;
+document.title = t("lazyTitle", host);
 
 let navigating = false;
 activateTargetIfVisible();

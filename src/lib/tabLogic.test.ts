@@ -1,5 +1,19 @@
 import { describe, expect, it } from "vitest";
-import { filterCommands, findFallbackTab, looksLikeTarget, normalizeTarget } from "./tabLogic";
+import {
+  createCommands,
+  filterCommands,
+  findFallbackTab,
+  looksLikeTarget,
+  normalizeTarget,
+  TargetValidationError,
+} from "./tabLogic";
+
+const commands = createCommands({
+  "lazy-open": "URLを遅延オープン",
+  "suspend-current": "現在のタブを休止",
+  "suspend-others": "他のタブを休止",
+  "wake-first": "休止中のタブを開く",
+});
 
 describe("normalizeTarget", () => {
   it("adds https to a bare host", () => {
@@ -13,8 +27,12 @@ describe("normalizeTarget", () => {
   });
 
   it("rejects executable and credentialed URLs", () => {
-    expect(() => normalizeTarget("javascript:alert(1)")).toThrow("http または https");
-    expect(() => normalizeTarget("https://user:secret@example.com")).toThrow("認証情報");
+    expect(() => normalizeTarget("javascript:alert(1)")).toThrow(
+      new TargetValidationError("protocol"),
+    );
+    expect(() => normalizeTarget("https://user:secret@example.com")).toThrow(
+      new TargetValidationError("credentials"),
+    );
   });
 });
 
@@ -26,8 +44,8 @@ describe("command filtering", () => {
   });
 
   it("filters commands by Japanese label and English keywords", () => {
-    expect(filterCommands("他").map((command) => command.id)).toEqual(["suspend-others"]);
-    expect(filterCommands("discard").map((command) => command.id)).toEqual([
+    expect(filterCommands("他", commands).map((command) => command.id)).toEqual(["suspend-others"]);
+    expect(filterCommands("discard", commands).map((command) => command.id)).toEqual([
       "suspend-current",
       "suspend-others",
     ]);

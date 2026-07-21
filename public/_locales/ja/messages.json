@@ -1,0 +1,68 @@
+{
+  "extensionName": { "message": "chrome-ctlp" },
+  "extensionDescription": {
+    "message": "Chrome のタブ操作をキーボード中心で実行するコマンドパレット。"
+  },
+  "actionOpenPalette": { "message": "chrome-ctlp を開く" },
+  "commandOpenPaletteDescription": { "message": "chrome-ctlp を開く" },
+  "paletteAriaLabel": { "message": "chrome-ctlp コマンドパレット" },
+  "paletteCloseAriaLabel": { "message": "パレットを閉じる" },
+  "searchLabel": { "message": "コマンドまたはURLを検索" },
+  "searchPlaceholder": { "message": "コマンドまたはURLを検索..." },
+  "clearInputAriaLabel": { "message": "入力を消去" },
+  "commandsHeading": { "message": "コマンド" },
+  "commandsListAriaLabel": { "message": "コマンド" },
+  "commandLazyOpenLabel": { "message": "URLを遅延オープン" },
+  "commandLazyOpenDetail": { "message": "選ぶまで読み込まない" },
+  "commandLazyOpenScope": { "message": "遅延タブ" },
+  "commandSuspendCurrentLabel": { "message": "現在のタブを休止" },
+  "commandSuspendCurrentDetail": { "message": "タブを残してメモリを解放" },
+  "commandSuspendCurrentScope": { "message": "現在" },
+  "commandSuspendOthersLabel": { "message": "他のタブを休止" },
+  "commandSuspendOthersDetail": { "message": "固定・再生中のタブは除外" },
+  "commandSuspendOthersScope": { "message": "ウィンドウ" },
+  "commandWakeFirstLabel": { "message": "休止中のタブを開く" },
+  "commandWakeFirstDetail": { "message": "最初の休止タブを復帰" },
+  "commandWakeFirstScope": { "message": "休止中" },
+  "emptyResults": { "message": "一致するコマンドがありません" },
+  "footerSleepingCount": {
+    "message": "休止中: $COUNT$ タブ",
+    "placeholders": {
+      "count": { "content": "$1", "example": "3" }
+    }
+  },
+  "footerRun": { "message": "実行" },
+  "footerClose": { "message": "閉じる" },
+  "statusComplete": { "message": "完了しました" },
+  "statusLazyOpened": {
+    "message": "$HOST$ を休止状態で追加しました",
+    "placeholders": {
+      "host": { "content": "$1", "example": "example.com" }
+    }
+  },
+  "statusCurrentSuspended": { "message": "現在のタブを休止しました" },
+  "statusOthersSuspended": {
+    "message": "$COUNT$個のタブを休止しました",
+    "placeholders": {
+      "count": { "content": "$1", "example": "3" }
+    }
+  },
+  "statusWakeFirst": { "message": "休止中のタブを開きました" },
+  "errorGeneric": { "message": "操作に失敗しました" },
+  "errorUrlRequired": { "message": "URLを入力してください" },
+  "errorUrlInvalid": { "message": "有効なURLを入力してください" },
+  "errorUrlProtocol": { "message": "http または https のURLだけを開けます" },
+  "errorUrlCredentials": { "message": "認証情報を含むURLは開けません" },
+  "errorTabCreate": { "message": "タブを作成できませんでした" },
+  "errorTabDiscard": { "message": "タブを休止状態にできませんでした" },
+  "errorCurrentTabMissing": { "message": "現在のタブを取得できませんでした" },
+  "errorNoSleepingTab": { "message": "休止中のタブはありません" },
+  "lazyPrompt": { "message": "選択すると開きます" },
+  "lazyFallbackHost": { "message": "休止中のタブ" },
+  "lazyTitle": {
+    "message": "休止中 · $HOST$",
+    "placeholders": {
+      "host": { "content": "$1", "example": "example.com" }
+    }
+  }
+}

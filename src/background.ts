@@ -1,3 +1,4 @@
+import { t, userErrorMessage } from "./lib/i18n";
 import { type CommandId, findFallbackTab, normalizeTarget } from "./lib/tabLogic";
 
 interface GetStateRequest {
@@ -35,7 +36,7 @@ chrome.runtime.onMessage.addListener(
       .then(sendResponse)
       .catch((error: unknown) =>
         sendResponse({
-          error: error instanceof Error ? error.message : "操作に失敗しました",
+          error: userErrorMessage(error),
           ok: false,
           sleepingCount: 0,
         }),
@@ -91,19 +92,19 @@ async function executeCommand(
   if (request.commandId === "lazy-open") {
     const target = normalizeTarget(request.input);
     await createLazyTab(target, sourceTab);
-    return `${target.host} を休止状態で追加しました`;
+    return t("statusLazyOpened", target.host);
   }
   if (request.commandId === "suspend-current") {
     await suspendCurrentTab(sourceTab);
-    return "現在のタブを休止しました";
+    return t("statusCurrentSuspended");
   }
   if (request.commandId === "suspend-others") {
     const count = await suspendOtherTabs(sourceTab?.windowId);
-    return `${count}個のタブを休止しました`;
+    return t("statusOthersSuspended", String(count));
   }
 
   await wakeFirstSleepingTab(sourceTab?.windowId);
-  return "休止中のタブを開きました";
+  return t("statusWakeFirst");
 }
 
 async function countSleepingTabs(windowId?: number): Promise<number> {
@@ -124,13 +125,13 @@ async function createLazyTab(target: URL, sourceTab?: chrome.tabs.Tab): Promise<
     windowId: sourceTab?.windowId,
   });
   if (tab.id === undefined) {
-    throw new Error("タブを作成できませんでした");
+    throw new Error(t("errorTabCreate"));
   }
 
   await waitForTabComplete(tab.id, tab.status);
   const discardedTab = await chrome.tabs.discard(tab.id);
   if (!discardedTab?.discarded) {
-    throw new Error("タブを休止状態にできませんでした");
+    throw new Error(t("errorTabDiscard"));
   }
 }
 
@@ -167,7 +168,7 @@ async function suspendCurrentTab(sourceTab?: chrome.tabs.Tab): Promise<void> {
   );
   const currentTab = tabs.find((tab) => tab.id === sourceTab?.id) ?? tabs.find((tab) => tab.active);
   if (currentTab?.id === undefined) {
-    throw new Error("現在のタブを取得できませんでした");
+    throw new Error(t("errorCurrentTabMissing"));
   }
 
   const fallback = findFallbackTab(tabs, currentTab);
@@ -196,7 +197,7 @@ async function wakeFirstSleepingTab(windowId?: number): Promise<void> {
   );
   const sleepingTab = tabs.find((tab) => tab.discarded);
   if (sleepingTab?.id === undefined) {
-    throw new Error("休止中のタブはありません");
+    throw new Error(t("errorNoSleepingTab"));
   }
   await chrome.tabs.update(sleepingTab.id, { active: true });
 }

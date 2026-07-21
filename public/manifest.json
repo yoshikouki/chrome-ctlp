@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "chrome-ctlp",
-  "description": "A keyboard-first command palette for controlling Chrome tabs.",
-  "version": "0.2.0",
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "0.3.0",
+  "default_locale": "en",
   "minimum_chrome_version": "123",
   "permissions": ["activeTab", "scripting"],
   "background": {
@@ -10,7 +11,7 @@
     "type": "module"
   },
   "action": {
-    "default_title": "Open chrome-ctlp"
+    "default_title": "__MSG_actionOpenPalette__"
   },
   "commands": {
     "open-palette": {
@@ -18,7 +19,7 @@
         "default": "Ctrl+Shift+K",
         "mac": "Command+Shift+K"
       },
-      "description": "Open chrome-ctlp"
+      "description": "__MSG_commandOpenPaletteDescription__"
     }
   }
 }
