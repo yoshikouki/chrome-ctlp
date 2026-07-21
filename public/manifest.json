@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "chrome-ctlp",
+  "description": "A keyboard-first command palette for controlling Chrome tabs.",
+  "version": "0.1.0",
+  "minimum_chrome_version": "123",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Open chrome-ctlp"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Open chrome-ctlp"
+    }
+  }
+}
