@@ -1,24 +1,10 @@
 import { t, userErrorMessage } from "./lib/i18n";
-import { type CommandId, findFallbackTab, normalizeTarget } from "./lib/tabLogic";
-
-interface GetStateRequest {
-  type: "get-state";
-}
-
-interface ExecuteRequest {
-  commandId: CommandId;
-  input: string;
-  type: "execute";
-}
-
-type PaletteRequest = ExecuteRequest | GetStateRequest;
-
-interface PaletteResponse {
-  error?: string;
-  message?: string;
-  ok: boolean;
-  sleepingCount: number;
-}
+import type {
+  ExecutePaletteCommandRequest,
+  PaletteRequest,
+  PaletteResponse,
+} from "./lib/paletteProtocol";
+import { findFallbackTab, normalizeTarget } from "./lib/tabLogic";
 
 chrome.action.onClicked.addListener((tab) => {
   void showPalette(tab.id);
@@ -86,25 +72,32 @@ async function handleMessage(
 }
 
 async function executeCommand(
-  request: ExecuteRequest,
+  request: ExecutePaletteCommandRequest,
   sourceTab?: chrome.tabs.Tab,
 ): Promise<string> {
-  if (request.commandId === "lazy-open") {
-    const target = normalizeTarget(request.input);
-    await createLazyTab(target, sourceTab);
-    return t("statusLazyOpened", target.host);
+  switch (request.commandId) {
+    case "lazy-open": {
+      const target = normalizeTarget(request.input);
+      await createLazyTab(target, sourceTab);
+      return t("statusLazyOpened", target.host);
+    }
+    case "suspend-current":
+      await suspendCurrentTab(sourceTab);
+      return t("statusCurrentSuspended");
+    case "suspend-others": {
+      const count = await suspendOtherTabs(sourceTab?.windowId);
+      return t("statusOthersSuspended", String(count));
+    }
+    case "wake-first":
+      await wakeFirstSleepingTab(sourceTab?.windowId);
+      return t("statusWakeFirst");
+    default:
+      return assertNever(request.commandId);
   }
-  if (request.commandId === "suspend-current") {
-    await suspendCurrentTab(sourceTab);
-    return t("statusCurrentSuspended");
-  }
-  if (request.commandId === "suspend-others") {
-    const count = await suspendOtherTabs(sourceTab?.windowId);
-    return t("statusOthersSuspended", String(count));
-  }
+}
 
-  await wakeFirstSleepingTab(sourceTab?.windowId);
-  return t("statusWakeFirst");
+function assertNever(value: never): never {
+  throw new Error(`Unhandled command: ${String(value)}`);
 }
 
 async function countSleepingTabs(windowId?: number): Promise<number> {

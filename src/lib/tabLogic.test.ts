@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import {
-  createCommands,
   filterCommands,
   findFallbackTab,
   looksLikeTarget,
@@ -8,12 +7,28 @@ import {
   TargetValidationError,
 } from "./tabLogic";
 
-const commands = createCommands({
-  "lazy-open": "URLを遅延オープン",
-  "suspend-current": "現在のタブを休止",
-  "suspend-others": "他のタブを休止",
-  "wake-first": "休止中のタブを開く",
-});
+const commands = [
+  {
+    id: "lazy-open",
+    keywords: ["url", "lazy", "open", "遅延", "開く"],
+    label: "URLを遅延オープン",
+  },
+  {
+    id: "suspend-current",
+    keywords: ["current", "discard", "suspend", "sleep", "現在", "休止"],
+    label: "現在のタブを休止",
+  },
+  {
+    id: "suspend-others",
+    keywords: ["others", "discard", "suspend", "sleep", "他", "休止"],
+    label: "他のタブを休止",
+  },
+  {
+    id: "wake-first",
+    keywords: ["wake", "resume", "sleep", "休止", "開く"],
+    label: "休止中のタブを開く",
+  },
+] as const;
 
 describe("normalizeTarget", () => {
   it("adds https to a bare host", () => {

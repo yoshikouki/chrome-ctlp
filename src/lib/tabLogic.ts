@@ -1,7 +1,4 @@
-export type CommandId = "lazy-open" | "suspend-current" | "suspend-others" | "wake-first";
-
-export interface PaletteCommand {
-  id: CommandId;
+export interface FilterableCommand {
   label: string;
   keywords: readonly string[];
 }
@@ -16,21 +13,6 @@ export class TargetValidationError extends Error {
     this.name = "TargetValidationError";
     this.code = code;
   }
-}
-
-const commandKeywords: Record<CommandId, readonly string[]> = {
-  "lazy-open": ["url", "lazy", "open", "遅延", "開く"],
-  "suspend-current": ["current", "discard", "suspend", "sleep", "現在", "休止"],
-  "suspend-others": ["others", "discard", "suspend", "sleep", "他", "休止"],
-  "wake-first": ["wake", "resume", "sleep", "休止", "開く"],
-};
-
-export function createCommands(labels: Record<CommandId, string>): readonly PaletteCommand[] {
-  return (Object.keys(commandKeywords) as CommandId[]).map((id) => ({
-    id,
-    keywords: commandKeywords[id],
-    label: labels[id],
-  }));
 }
 
 export function normalizeTarget(rawInput: string): URL {
@@ -67,10 +49,10 @@ export function looksLikeTarget(input: string): boolean {
   );
 }
 
-export function filterCommands(
+export function filterCommands<Command extends FilterableCommand>(
   input: string,
-  commands: readonly PaletteCommand[],
-): readonly PaletteCommand[] {
+  commands: readonly Command[],
+): readonly Command[] {
   const query = input.trim().toLocaleLowerCase();
   if (!query || looksLikeTarget(query)) {
     return commands;
