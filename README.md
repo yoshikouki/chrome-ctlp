@@ -1,13 +1,17 @@
 # chrome-ctlp
 
-A keyboard-first command palette for Chrome tab controls that extensions can access.
+A keyboard-first command palette for Chrome.
 
-## MVP commands
+## Commands
 
+The palette currently includes 38 commands that require no permissions beyond its existing
+`activeTab` and `scripting` baseline:
+
+- Create, duplicate, pin, mute, reload, navigate, switch, move, close, suspend, wake, and zoom tabs
+- Create, focus, minimize, maximize, fullscreen, and close windows
+- Scroll the current page
+- Open Chrome's downloads, history, bookmarks, settings, extensions, and shortcut pages
 - Open an HTTP(S) URL as a discarded lazy tab without requesting the target first
-- Discard the current tab while keeping it in the tab strip
-- Discard inactive, unpinned, non-audible tabs
-- Activate the first discarded tab
 
 The lazy-open command creates a lightweight extension-owned placeholder, keeps the target in its URL
 fragment, discards the placeholder, and navigates to the target only when the page becomes visible.
@@ -15,6 +19,9 @@ fragment, discards the placeholder, and navigates to the target only when the pa
 The palette is injected into the active page only after the user clicks the extension or invokes its
 keyboard shortcut. It uses Chrome's temporary `activeTab` grant and does not request persistent site
 access. The in-page surface can therefore blur and reveal the current page behind it.
+
+Features requiring more access are intentionally deferred. See
+[`docs/permissions.md`](docs/permissions.md) for the permission boundary and candidate commands.
 
 Chrome does not allow extensions to inject into protected pages such as `chrome://` URLs, the Chrome
 Web Store, or other extensions' pages. Open a regular HTTP(S) page before invoking the palette.

@@ -1,8 +1,6 @@
 {
   "extensionName": { "message": "chrome-ctlp" },
-  "extensionDescription": {
-    "message": "Chrome のタブ操作をキーボード中心で実行するコマンドパレット。"
-  },
+  "extensionDescription": { "message": "Chrome をキーボード中心で操作するコマンドパレット。" },
   "actionOpenPalette": { "message": "chrome-ctlp を開く" },
   "commandOpenPaletteDescription": { "message": "chrome-ctlp を開く" },
   "paletteAriaLabel": { "message": "chrome-ctlp コマンドパレット" },
@@ -15,6 +13,36 @@
   "commandLazyOpenLabel": { "message": "URLを遅延オープン" },
   "commandLazyOpenDetail": { "message": "選ぶまで読み込まない" },
   "commandLazyOpenScope": { "message": "遅延タブ" },
+  "commandNewTabLabel": { "message": "新しいタブを開く" },
+  "commandNewTabDetail": { "message": "現在のタブの隣に作成" },
+  "commandDuplicateCurrentLabel": { "message": "現在のタブを複製" },
+  "commandDuplicateCurrentDetail": { "message": "同じページを隣に開く" },
+  "commandTogglePinCurrentLabel": { "message": "タブの固定を切り替え" },
+  "commandTogglePinCurrentDetail": { "message": "現在のタブを固定または解除" },
+  "commandToggleMuteCurrentLabel": { "message": "タブの音声を切り替え" },
+  "commandToggleMuteCurrentDetail": { "message": "現在のタブをミュートまたは解除" },
+  "commandReloadCurrentLabel": { "message": "現在のタブを再読み込み" },
+  "commandReloadCurrentDetail": { "message": "現在のページを更新" },
+  "commandGoBackLabel": { "message": "前のページへ戻る" },
+  "commandGoBackDetail": { "message": "現在のタブの履歴を戻る" },
+  "commandGoForwardLabel": { "message": "次のページへ進む" },
+  "commandGoForwardDetail": { "message": "現在のタブの履歴を進む" },
+  "commandPreviousTabLabel": { "message": "前のタブへ切り替え" },
+  "commandPreviousTabDetail": { "message": "左隣のタブを開く" },
+  "commandNextTabLabel": { "message": "次のタブへ切り替え" },
+  "commandNextTabDetail": { "message": "右隣のタブを開く" },
+  "commandMoveTabLeftLabel": { "message": "タブを左へ移動" },
+  "commandMoveTabLeftDetail": { "message": "現在のタブを1つ左へ移動" },
+  "commandMoveTabRightLabel": { "message": "タブを右へ移動" },
+  "commandMoveTabRightDetail": { "message": "現在のタブを1つ右へ移動" },
+  "commandMoveTabToNewWindowLabel": { "message": "タブを新しいウィンドウへ移動" },
+  "commandMoveTabToNewWindowDetail": { "message": "現在のタブを別ウィンドウに分離" },
+  "commandCloseCurrentLabel": { "message": "現在のタブを閉じる" },
+  "commandCloseCurrentDetail": { "message": "タブ一覧から削除" },
+  "commandCloseOtherTabsLabel": { "message": "他のタブを閉じる" },
+  "commandCloseOtherTabsDetail": { "message": "現在と固定タブは残す" },
+  "commandCloseTabsToRightLabel": { "message": "右側のタブを閉じる" },
+  "commandCloseTabsToRightDetail": { "message": "固定タブは残す" },
   "commandSuspendCurrentLabel": { "message": "現在のタブを休止" },
   "commandSuspendCurrentDetail": { "message": "タブを残してメモリを解放" },
   "commandSuspendCurrentScope": { "message": "現在" },
@@ -24,30 +52,78 @@
   "commandWakeFirstLabel": { "message": "休止中のタブを開く" },
   "commandWakeFirstDetail": { "message": "最初の休止タブを復帰" },
   "commandWakeFirstScope": { "message": "休止中" },
+  "commandZoomInLabel": { "message": "ページを拡大" },
+  "commandZoomInDetail": { "message": "表示倍率を10%上げる" },
+  "commandZoomOutLabel": { "message": "ページを縮小" },
+  "commandZoomOutDetail": { "message": "表示倍率を10%下げる" },
+  "commandZoomResetLabel": { "message": "表示倍率をリセット" },
+  "commandZoomResetDetail": { "message": "ページ既定の倍率へ戻す" },
+  "commandNewWindowLabel": { "message": "新しいウィンドウを開く" },
+  "commandNewWindowDetail": { "message": "通常のChromeウィンドウを作成" },
+  "commandFocusNextWindowLabel": { "message": "次のウィンドウへ切り替え" },
+  "commandFocusNextWindowDetail": { "message": "Chromeウィンドウを順番に移動" },
+  "commandMinimizeWindowLabel": { "message": "現在のウィンドウを最小化" },
+  "commandMinimizeWindowDetail": { "message": "Dockまたはタスクバーへ格納" },
+  "commandMaximizeWindowLabel": { "message": "現在のウィンドウを最大化" },
+  "commandMaximizeWindowDetail": { "message": "利用可能な画面領域へ広げる" },
+  "commandToggleFullscreenWindowLabel": { "message": "ウィンドウの全画面を切り替え" },
+  "commandToggleFullscreenWindowDetail": { "message": "全画面表示へ移行または解除" },
+  "commandCloseWindowLabel": { "message": "現在のウィンドウを閉じる" },
+  "commandCloseWindowDetail": { "message": "このウィンドウの全タブを閉じる" },
+  "commandScrollTopLabel": { "message": "ページ先頭へスクロール" },
+  "commandScrollTopDetail": { "message": "ページの最初へ移動" },
+  "commandScrollBottomLabel": { "message": "ページ末尾へスクロール" },
+  "commandScrollBottomDetail": { "message": "ページの最後へ移動" },
+  "commandPageUpLabel": { "message": "1画面上へスクロール" },
+  "commandPageUpDetail": { "message": "表示領域1つ分だけ上へ移動" },
+  "commandPageDownLabel": { "message": "1画面下へスクロール" },
+  "commandPageDownDetail": { "message": "表示領域1つ分だけ下へ移動" },
+  "commandOpenDownloadsLabel": { "message": "ダウンロードを開く" },
+  "commandOpenDownloadsDetail": { "message": "Chromeのダウンロード管理を表示" },
+  "commandOpenHistoryLabel": { "message": "履歴を開く" },
+  "commandOpenHistoryDetail": { "message": "Chromeの履歴ページを表示" },
+  "commandOpenBookmarksLabel": { "message": "ブックマーク管理を開く" },
+  "commandOpenBookmarksDetail": { "message": "Chromeのブックマーク管理を表示" },
+  "commandOpenSettingsLabel": { "message": "設定を開く" },
+  "commandOpenSettingsDetail": { "message": "Chromeの設定を表示" },
+  "commandOpenExtensionsLabel": { "message": "拡張機能を開く" },
+  "commandOpenExtensionsDetail": { "message": "インストール済み拡張機能を管理" },
+  "commandOpenShortcutsLabel": { "message": "拡張機能ショートカットを開く" },
+  "commandOpenShortcutsDetail": { "message": "拡張機能のキー操作を設定" },
+  "scopeTab": { "message": "タブ" },
+  "scopeWindow": { "message": "ウィンドウ" },
+  "scopePage": { "message": "ページ" },
+  "scopeChrome": { "message": "Chrome" },
   "emptyResults": { "message": "一致するコマンドがありません" },
   "footerSleepingCount": {
     "message": "休止中: $COUNT$ タブ",
-    "placeholders": {
-      "count": { "content": "$1", "example": "3" }
-    }
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
   },
   "footerRun": { "message": "実行" },
   "footerClose": { "message": "閉じる" },
   "statusComplete": { "message": "完了しました" },
   "statusLazyOpened": {
     "message": "$HOST$ を休止状態で追加しました",
-    "placeholders": {
-      "host": { "content": "$1", "example": "example.com" }
-    }
+    "placeholders": { "host": { "content": "$1", "example": "example.com" } }
   },
   "statusCurrentSuspended": { "message": "現在のタブを休止しました" },
   "statusOthersSuspended": {
     "message": "$COUNT$個のタブを休止しました",
-    "placeholders": {
-      "count": { "content": "$1", "example": "3" }
-    }
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
   },
   "statusWakeFirst": { "message": "休止中のタブを開きました" },
+  "statusPinned": { "message": "現在のタブを固定しました" },
+  "statusUnpinned": { "message": "現在のタブの固定を解除しました" },
+  "statusMuted": { "message": "現在のタブをミュートしました" },
+  "statusUnmuted": { "message": "現在のタブのミュートを解除しました" },
+  "statusTabsClosed": {
+    "message": "$COUNT$個のタブを閉じました",
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
+  },
+  "statusZoomLevel": {
+    "message": "表示倍率: $PERCENT$%",
+    "placeholders": { "percent": { "content": "$1", "example": "110" } }
+  },
   "errorGeneric": { "message": "操作に失敗しました" },
   "errorUrlRequired": { "message": "URLを入力してください" },
   "errorUrlInvalid": { "message": "有効なURLを入力してください" },
@@ -57,12 +133,15 @@
   "errorTabDiscard": { "message": "タブを休止状態にできませんでした" },
   "errorCurrentTabMissing": { "message": "現在のタブを取得できませんでした" },
   "errorNoSleepingTab": { "message": "休止中のタブはありません" },
+  "errorCannotGoBack": { "message": "前のページはありません" },
+  "errorCannotGoForward": { "message": "次のページはありません" },
+  "errorCurrentWindowMissing": { "message": "現在のウィンドウを取得できませんでした" },
+  "errorNoOtherWindow": { "message": "他のChromeウィンドウはありません" },
+  "errorWindowCreate": { "message": "ウィンドウを作成できませんでした" },
   "lazyPrompt": { "message": "選択すると開きます" },
   "lazyFallbackHost": { "message": "休止中のタブ" },
   "lazyTitle": {
     "message": "休止中 · $HOST$",
-    "placeholders": {
-      "host": { "content": "$1", "example": "example.com" }
-    }
+    "placeholders": { "host": { "content": "$1", "example": "example.com" } }
   }
 }

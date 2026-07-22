@@ -1,8 +1,6 @@
 {
   "extensionName": { "message": "chrome-ctlp" },
-  "extensionDescription": {
-    "message": "A keyboard-first command palette for controlling Chrome tabs."
-  },
+  "extensionDescription": { "message": "A keyboard-first command palette for Chrome." },
   "actionOpenPalette": { "message": "Open chrome-ctlp" },
   "commandOpenPaletteDescription": { "message": "Open chrome-ctlp" },
   "paletteAriaLabel": { "message": "chrome-ctlp command palette" },
@@ -15,6 +13,36 @@
   "commandLazyOpenLabel": { "message": "Lazy-open URL" },
   "commandLazyOpenDetail": { "message": "Load only when selected" },
   "commandLazyOpenScope": { "message": "Lazy tab" },
+  "commandNewTabLabel": { "message": "Open new tab" },
+  "commandNewTabDetail": { "message": "Create it beside the current tab" },
+  "commandDuplicateCurrentLabel": { "message": "Duplicate current tab" },
+  "commandDuplicateCurrentDetail": { "message": "Open a copy beside it" },
+  "commandTogglePinCurrentLabel": { "message": "Toggle pinned state" },
+  "commandTogglePinCurrentDetail": { "message": "Pin or unpin the current tab" },
+  "commandToggleMuteCurrentLabel": { "message": "Toggle tab audio" },
+  "commandToggleMuteCurrentDetail": { "message": "Mute or unmute the current tab" },
+  "commandReloadCurrentLabel": { "message": "Reload current tab" },
+  "commandReloadCurrentDetail": { "message": "Refresh the current page" },
+  "commandGoBackLabel": { "message": "Go back" },
+  "commandGoBackDetail": { "message": "Navigate back in the current tab" },
+  "commandGoForwardLabel": { "message": "Go forward" },
+  "commandGoForwardDetail": { "message": "Navigate forward in the current tab" },
+  "commandPreviousTabLabel": { "message": "Switch to previous tab" },
+  "commandPreviousTabDetail": { "message": "Activate the tab to the left" },
+  "commandNextTabLabel": { "message": "Switch to next tab" },
+  "commandNextTabDetail": { "message": "Activate the tab to the right" },
+  "commandMoveTabLeftLabel": { "message": "Move tab left" },
+  "commandMoveTabLeftDetail": { "message": "Move the current tab one position" },
+  "commandMoveTabRightLabel": { "message": "Move tab right" },
+  "commandMoveTabRightDetail": { "message": "Move the current tab one position" },
+  "commandMoveTabToNewWindowLabel": { "message": "Move tab to new window" },
+  "commandMoveTabToNewWindowDetail": { "message": "Detach the current tab" },
+  "commandCloseCurrentLabel": { "message": "Close current tab" },
+  "commandCloseCurrentDetail": { "message": "Remove it from the tab strip" },
+  "commandCloseOtherTabsLabel": { "message": "Close other tabs" },
+  "commandCloseOtherTabsDetail": { "message": "Keep the current and pinned tabs" },
+  "commandCloseTabsToRightLabel": { "message": "Close tabs to the right" },
+  "commandCloseTabsToRightDetail": { "message": "Keep pinned tabs" },
   "commandSuspendCurrentLabel": { "message": "Suspend current tab" },
   "commandSuspendCurrentDetail": { "message": "Keep the tab and release memory" },
   "commandSuspendCurrentScope": { "message": "Current" },
@@ -24,30 +52,78 @@
   "commandWakeFirstLabel": { "message": "Open a sleeping tab" },
   "commandWakeFirstDetail": { "message": "Wake the first sleeping tab" },
   "commandWakeFirstScope": { "message": "Sleeping" },
+  "commandZoomInLabel": { "message": "Zoom in" },
+  "commandZoomInDetail": { "message": "Increase page zoom by 10%" },
+  "commandZoomOutLabel": { "message": "Zoom out" },
+  "commandZoomOutDetail": { "message": "Decrease page zoom by 10%" },
+  "commandZoomResetLabel": { "message": "Reset zoom" },
+  "commandZoomResetDetail": { "message": "Return to the default page zoom" },
+  "commandNewWindowLabel": { "message": "Open new window" },
+  "commandNewWindowDetail": { "message": "Create a normal Chrome window" },
+  "commandFocusNextWindowLabel": { "message": "Focus next window" },
+  "commandFocusNextWindowDetail": { "message": "Cycle through Chrome windows" },
+  "commandMinimizeWindowLabel": { "message": "Minimize current window" },
+  "commandMinimizeWindowDetail": { "message": "Send it to the Dock or taskbar" },
+  "commandMaximizeWindowLabel": { "message": "Maximize current window" },
+  "commandMaximizeWindowDetail": { "message": "Fill the available screen area" },
+  "commandToggleFullscreenWindowLabel": { "message": "Toggle window fullscreen" },
+  "commandToggleFullscreenWindowDetail": { "message": "Enter or leave fullscreen" },
+  "commandCloseWindowLabel": { "message": "Close current window" },
+  "commandCloseWindowDetail": { "message": "Close every tab in this window" },
+  "commandScrollTopLabel": { "message": "Scroll to top" },
+  "commandScrollTopDetail": { "message": "Jump to the start of the page" },
+  "commandScrollBottomLabel": { "message": "Scroll to bottom" },
+  "commandScrollBottomDetail": { "message": "Jump to the end of the page" },
+  "commandPageUpLabel": { "message": "Page up" },
+  "commandPageUpDetail": { "message": "Scroll up by one viewport" },
+  "commandPageDownLabel": { "message": "Page down" },
+  "commandPageDownDetail": { "message": "Scroll down by one viewport" },
+  "commandOpenDownloadsLabel": { "message": "Open Downloads" },
+  "commandOpenDownloadsDetail": { "message": "Open Chrome's downloads manager" },
+  "commandOpenHistoryLabel": { "message": "Open History" },
+  "commandOpenHistoryDetail": { "message": "Open Chrome's history page" },
+  "commandOpenBookmarksLabel": { "message": "Open Bookmark Manager" },
+  "commandOpenBookmarksDetail": { "message": "Open Chrome's bookmark manager" },
+  "commandOpenSettingsLabel": { "message": "Open Settings" },
+  "commandOpenSettingsDetail": { "message": "Open Chrome settings" },
+  "commandOpenExtensionsLabel": { "message": "Open Extensions" },
+  "commandOpenExtensionsDetail": { "message": "Manage installed extensions" },
+  "commandOpenShortcutsLabel": { "message": "Open Extension Shortcuts" },
+  "commandOpenShortcutsDetail": { "message": "Configure extension keyboard shortcuts" },
+  "scopeTab": { "message": "Tab" },
+  "scopeWindow": { "message": "Window" },
+  "scopePage": { "message": "Page" },
+  "scopeChrome": { "message": "Chrome" },
   "emptyResults": { "message": "No matching commands" },
   "footerSleepingCount": {
     "message": "Sleeping: $COUNT$ tabs",
-    "placeholders": {
-      "count": { "content": "$1", "example": "3" }
-    }
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
   },
   "footerRun": { "message": "Run" },
   "footerClose": { "message": "Close" },
   "statusComplete": { "message": "Done" },
   "statusLazyOpened": {
     "message": "Added $HOST$ as a sleeping tab",
-    "placeholders": {
-      "host": { "content": "$1", "example": "example.com" }
-    }
+    "placeholders": { "host": { "content": "$1", "example": "example.com" } }
   },
   "statusCurrentSuspended": { "message": "Suspended the current tab" },
   "statusOthersSuspended": {
     "message": "Suspended tabs: $COUNT$",
-    "placeholders": {
-      "count": { "content": "$1", "example": "3" }
-    }
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
   },
   "statusWakeFirst": { "message": "Opened a sleeping tab" },
+  "statusPinned": { "message": "Pinned the current tab" },
+  "statusUnpinned": { "message": "Unpinned the current tab" },
+  "statusMuted": { "message": "Muted the current tab" },
+  "statusUnmuted": { "message": "Unmuted the current tab" },
+  "statusTabsClosed": {
+    "message": "Closed tabs: $COUNT$",
+    "placeholders": { "count": { "content": "$1", "example": "3" } }
+  },
+  "statusZoomLevel": {
+    "message": "Zoom: $PERCENT$%",
+    "placeholders": { "percent": { "content": "$1", "example": "110" } }
+  },
   "errorGeneric": { "message": "The operation failed" },
   "errorUrlRequired": { "message": "Enter a URL" },
   "errorUrlInvalid": { "message": "Enter a valid URL" },
@@ -57,12 +133,15 @@
   "errorTabDiscard": { "message": "Could not suspend the tab" },
   "errorCurrentTabMissing": { "message": "Could not find the current tab" },
   "errorNoSleepingTab": { "message": "There are no sleeping tabs" },
+  "errorCannotGoBack": { "message": "There is no previous page" },
+  "errorCannotGoForward": { "message": "There is no next page" },
+  "errorCurrentWindowMissing": { "message": "Could not find the current window" },
+  "errorNoOtherWindow": { "message": "There is no other Chrome window" },
+  "errorWindowCreate": { "message": "Could not create the window" },
   "lazyPrompt": { "message": "Select this tab to open it" },
   "lazyFallbackHost": { "message": "Sleeping tab" },
   "lazyTitle": {
     "message": "Sleeping · $HOST$",
-    "placeholders": {
-      "host": { "content": "$1", "example": "example.com" }
-    }
+    "placeholders": { "host": { "content": "$1", "example": "example.com" } }
   }
 }

@@ -53,6 +53,7 @@ export function CommandPalette({ close, sendRequest }: CommandPaletteProps): Rea
       }
       setBusy(true);
       setStatus("");
+      let shouldClose = false;
       try {
         command.validateInput?.(input);
         const response = await sendRequest({
@@ -69,13 +70,17 @@ export function CommandPalette({ close, sendRequest }: CommandPaletteProps): Rea
           setInput("");
           setSelectedIndex(0);
         }
+        shouldClose = command.closeOnSuccess;
       } catch (error) {
         setStatus(userErrorMessage(error));
       } finally {
         setBusy(false);
+        if (shouldClose) {
+          close();
+        }
       }
     },
-    [busy, input, sendRequest],
+    [busy, close, input, sendRequest],
   );
 
   function onKeyDown(event: React.KeyboardEvent<HTMLInputElement>): void {
