@@ -41,6 +41,7 @@ import { type FilterableCommand, looksLikeTarget, normalizeTarget } from "../lib
 
 export interface PaletteCommand extends FilterableCommand {
   clearInputOnSuccess: boolean;
+  closeOnDispatch: boolean;
   closeOnSuccess: boolean;
   detail: string;
   icon: Icon;
@@ -52,6 +53,7 @@ export interface PaletteCommand extends FilterableCommand {
 
 interface CommandDefinition {
   clearInputOnSuccess?: boolean;
+  closeOnDispatch?: boolean;
   closeOnSuccess?: boolean;
   detailKey: MessageKey;
   icon: Icon;
@@ -323,6 +325,14 @@ const definitionById: Record<CommandId, CommandDefinition> = {
     IconKeyboard,
     ["shortcuts", "keyboard", "extensions", "ショートカット", "キー"],
   ),
+  "reload-extension": {
+    closeOnDispatch: true,
+    detailKey: "commandReloadExtensionDetail",
+    icon: IconReload,
+    keywords: ["reload", "extension", "developer", "再読み込み", "拡張機能", "開発"],
+    labelKey: "commandReloadExtensionLabel",
+    scopeKey: "scopeDeveloper",
+  },
 };
 
 export function createCommandCatalog(translate: Translate = t): readonly PaletteCommand[] {
@@ -330,6 +340,7 @@ export function createCommandCatalog(translate: Translate = t): readonly Palette
     const definition = definitionById[id];
     return {
       clearInputOnSuccess: definition.clearInputOnSuccess ?? false,
+      closeOnDispatch: definition.closeOnDispatch ?? false,
       closeOnSuccess: definition.closeOnSuccess ?? false,
       detail: translate(definition.detailKey),
       icon: definition.icon,

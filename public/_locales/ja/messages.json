@@ -90,10 +90,13 @@
   "commandOpenExtensionsDetail": { "message": "インストール済み拡張機能を管理" },
   "commandOpenShortcutsLabel": { "message": "拡張機能ショートカットを開く" },
   "commandOpenShortcutsDetail": { "message": "拡張機能のキー操作を設定" },
+  "commandReloadExtensionLabel": { "message": "chrome-ctlp を再読み込み" },
+  "commandReloadExtensionDetail": { "message": "最新のビルド済みファイルを反映" },
   "scopeTab": { "message": "タブ" },
   "scopeWindow": { "message": "ウィンドウ" },
   "scopePage": { "message": "ページ" },
   "scopeChrome": { "message": "Chrome" },
+  "scopeDeveloper": { "message": "開発者" },
   "emptyResults": { "message": "一致するコマンドがありません" },
   "footerSleepingCount": {
     "message": "休止中: $COUNT$ タブ",

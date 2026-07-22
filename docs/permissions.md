@@ -19,7 +19,14 @@ Chrome公式によると、`chrome.tabs`の作成、更新、移動、再読込�
 - host permission: なし
 - optional permission: なし
 
-この範囲で、タブの作成・複製・固定・ミュート・移動・切替・再読込・休止・復帰・閉じる・表示倍率変更、ウィンドウ操作、現在ページのスクロール、Chrome標準管理画面の表示を実装している。
+この範囲で、タブの作成・複製・固定・ミュート・移動・切替・再読込・休止・復帰・閉じる・表示倍率変更、ウィンドウ操作、現在ページのスクロール、Chrome標準管理画面の表示、chrome-ctlp自身の再読み込みを実装している。
+
+### Extension reload boundary
+
+- chrome-ctlp自身の再読み込み: `chrome.runtime.reload()`を使う。追加権限なし
+- 他の拡張機能の列挙・有効化・無効化: `chrome.management`を使う。`management`権限が必要
+
+自己再読み込みは、未パック拡張機能の最新ビルドをChromeへ反映するための開発者向けコマンドである。ソースコードのビルドは行わない。
 
 ## Deferred capabilities requiring additional permissions
 
@@ -38,7 +45,7 @@ Chrome公式によると、`chrome.tabs`の作成、更新、移動、再読込�
 | 常駐パレットや補助画面 | `sidePanel` | 公式一覧に警告記載なし | UI要件が出た場合だけ追加 |
 | 右クリックメニューへのコマンド追加 | `contextMenus` | 公式一覧に警告記載なし | パレット以外の入口として別途判断 |
 | ダウンロードの開始、検索、一時停止、再開、取消、ファイル表示 | `downloads`、必要に応じて`downloads.open` | ダウンロードの管理 | 強い権限。既定にはしない |
-| インストール済み拡張機能の一覧、有効化、無効化、アンインストール | `management` | アプリ、拡張機能、テーマの管理 | 強い権限。既定にはしない |
+| 他の拡張機能の一覧、有効化、無効化、アンインストール | `management` | アプリ、拡張機能、テーマの管理 | 強い権限。自己再読み込みとは分離し、既定にはしない |
 | 通知表示 | `notifications` | 通知の表示 | 通知が製品要件になった場合だけ追加 |
 | クリップボードの読み取り | `clipboardRead` | コピー・貼り付けデータの読み取り | 強い権限。明示操作と用途を限定する |
 | URL、タイトル、選択テキスト等のクリップボード書き込み | `clipboardWrite` | コピー・貼り付けデータの変更 | 任意権限として別途設計する |
@@ -82,3 +89,5 @@ Chrome公式によると、`chrome.tabs`の作成、更新、移動、再読込�
 - [Scripting API](https://developer.chrome.com/docs/extensions/reference/api/scripting)
 - [Permissions list](https://developer.chrome.com/docs/extensions/reference/permissions-list)
 - [Declare permissions](https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions)
+- [Runtime API](https://developer.chrome.com/docs/extensions/reference/api/runtime#method-reload)
+- [Management API](https://developer.chrome.com/docs/extensions/reference/api/management)

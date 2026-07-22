@@ -4,13 +4,14 @@ A keyboard-first command palette for Chrome.
 
 ## Commands
 
-The palette currently includes 38 commands that require no permissions beyond its existing
+The palette currently includes 39 commands that require no permissions beyond its existing
 `activeTab` and `scripting` baseline:
 
 - Create, duplicate, pin, mute, reload, navigate, switch, move, close, suspend, wake, and zoom tabs
 - Create, focus, minimize, maximize, fullscreen, and close windows
 - Scroll the current page
 - Open Chrome's downloads, history, bookmarks, settings, extensions, and shortcut pages
+- Reload chrome-ctlp itself after rebuilding the unpacked extension
 - Open an HTTP(S) URL as a discarded lazy tab without requesting the target first
 
 The lazy-open command creates a lightweight extension-owned placeholder, keeps the target in its URL

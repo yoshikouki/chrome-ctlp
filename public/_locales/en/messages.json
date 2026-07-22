@@ -90,10 +90,13 @@
   "commandOpenExtensionsDetail": { "message": "Manage installed extensions" },
   "commandOpenShortcutsLabel": { "message": "Open Extension Shortcuts" },
   "commandOpenShortcutsDetail": { "message": "Configure extension keyboard shortcuts" },
+  "commandReloadExtensionLabel": { "message": "Reload chrome-ctlp" },
+  "commandReloadExtensionDetail": { "message": "Apply the latest built extension files" },
   "scopeTab": { "message": "Tab" },
   "scopeWindow": { "message": "Window" },
   "scopePage": { "message": "Page" },
   "scopeChrome": { "message": "Chrome" },
+  "scopeDeveloper": { "message": "Developer" },
   "emptyResults": { "message": "No matching commands" },
   "footerSleepingCount": {
     "message": "Sleeping: $COUNT$ tabs",

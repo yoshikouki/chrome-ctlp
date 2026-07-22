@@ -59,6 +59,16 @@ export function CommandPalette({ close, sendRequest }: CommandPaletteProps): Rea
       if (busy) {
         return;
       }
+      if (command.closeOnDispatch) {
+        const response = sendRequest({
+          commandId: command.id,
+          input,
+          type: "execute",
+        });
+        close();
+        void response.catch(() => undefined);
+        return;
+      }
       setBusy(true);
       setStatus("");
       let shouldClose = false;

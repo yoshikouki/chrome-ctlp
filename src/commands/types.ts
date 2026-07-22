@@ -37,6 +37,7 @@ export const commandIds = [
   "open-settings",
   "open-extensions",
   "open-shortcuts",
+  "reload-extension",
 ] as const;
 
 export type CommandId = (typeof commandIds)[number];

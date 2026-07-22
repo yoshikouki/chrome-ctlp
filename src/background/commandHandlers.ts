@@ -9,6 +9,7 @@ import {
   openShortcuts,
 } from "./chromePageCommands";
 import type { CommandHandler } from "./commandTypes";
+import { reloadExtension } from "./developerCommands";
 import { scrollPageDown, scrollPageUp, scrollToBottom, scrollToTop } from "./pageCommands";
 import {
   activateNextTab,
@@ -82,6 +83,7 @@ export const commandHandlers: Record<CommandId, CommandHandler> = {
   "open-settings": openSettings,
   "open-extensions": openExtensions,
   "open-shortcuts": openShortcuts,
+  "reload-extension": reloadExtension,
 };
 
 export function executeCommand(

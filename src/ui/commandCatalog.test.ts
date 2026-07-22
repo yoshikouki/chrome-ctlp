@@ -21,4 +21,10 @@ describe("command catalog", () => {
     expect(() => lazyOpen?.validateInput?.("")).toThrow(new TargetValidationError("required"));
     expect(lazyOpen?.clearInputOnSuccess).toBe(true);
   });
+
+  it("closes before reloading the extension context", () => {
+    const reloadExtension = commands.find((command) => command.id === "reload-extension");
+
+    expect(reloadExtension?.closeOnDispatch).toBe(true);
+  });
 });
