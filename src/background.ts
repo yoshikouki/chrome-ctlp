@@ -2,6 +2,7 @@ import { executeCommand } from "./background/commandHandlers";
 import { countSleepingTabs } from "./background/tabCommands";
 import { userErrorMessage } from "./lib/i18n";
 import type { PaletteRequest, PaletteResponse } from "./lib/paletteProtocol";
+import { findCommandShortcut } from "./lib/shortcut";
 
 chrome.action.onClicked.addListener((tab) => {
   void showPalette(tab.id);
@@ -54,9 +55,14 @@ async function handleMessage(
 ): Promise<PaletteResponse> {
   const windowId = sender.tab?.windowId;
   if (request.type === "get-state") {
+    const [sleepingCount, commands] = await Promise.all([
+      countSleepingTabs(windowId),
+      chrome.commands.getAll(),
+    ]);
     return {
       ok: true,
-      sleepingCount: await countSleepingTabs(windowId),
+      paletteShortcut: findCommandShortcut(commands, "open-palette"),
+      sleepingCount,
     };
   }
 

@@ -6,6 +6,7 @@ import IconX from "@tabler/icons-react/dist/esm/icons/IconX.mjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { t, userErrorMessage } from "../lib/i18n";
 import type { SendPaletteRequest } from "../lib/paletteProtocol";
+import { formatShortcut } from "../lib/shortcut";
 import { filterCommands } from "../lib/tabLogic";
 import { createCommandCatalog, type PaletteCommand } from "./commandCatalog";
 
@@ -19,6 +20,7 @@ interface CommandPaletteProps {
 export function CommandPalette({ close, sendRequest }: CommandPaletteProps): React.JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState("");
+  const [paletteShortcut, setPaletteShortcut] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [sleepingCount, setSleepingCount] = useState(0);
   const [status, setStatus] = useState("");
@@ -30,6 +32,12 @@ export function CommandPalette({ close, sendRequest }: CommandPaletteProps): Rea
     inputRef.current?.focus();
     void sendRequest({ type: "get-state" }).then((response) => {
       if (response.ok) {
+        setPaletteShortcut(
+          formatShortcut(
+            response.paletteShortcut ?? "",
+            navigator.platform.startsWith("Mac") ? "mac" : "other",
+          ),
+        );
         setSleepingCount(response.sleepingCount);
       }
     });
@@ -150,9 +158,9 @@ export function CommandPalette({ close, sendRequest }: CommandPaletteProps): Rea
             >
               <IconX aria-hidden size={19} stroke={2.2} />
             </button>
-          ) : (
-            <kbd>⇧⌘K</kbd>
-          )}
+          ) : paletteShortcut ? (
+            <kbd>{paletteShortcut}</kbd>
+          ) : null}
         </header>
 
         <div className="chrome-ctlp-section-label">{t("commandsHeading")}</div>

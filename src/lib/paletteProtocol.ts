@@ -16,6 +16,7 @@ export interface PaletteResponse {
   error?: string;
   message?: string;
   ok: boolean;
+  paletteShortcut?: string;
   sleepingCount: number;
 }
 
