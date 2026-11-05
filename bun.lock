@@ -5,7 +5,7 @@
     "": {
       "name": "chrome-ctlp",
       "dependencies": {
-        "@tabler/icons-react": "^3.45.0",
+        "@tabler/icons-react": "^3.50.0",
         "react": "^19.2.7",
         "react-dom": "^19.2.7",
       },
@@ -89,9 +89,9 @@
 
     "@rolldown/pluginutils": ["@rolldown/pluginutils@1.0.1", "https://npm.flatt.tech/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz", {}, "sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw=="],
 
-    "@tabler/icons": ["@tabler/icons@3.45.0", "https://npm.flatt.tech/@tabler/icons/-/icons-3.45.0.tgz", {}, "sha512-jiATwV8+zGYLTZ7gMLGivCic+KtsMZXcDmufIG8umlLxoHhI6902hGYIEt0Oa9Y9SXblNzUlrisHm5jOFMxOQA=="],
+    "@tabler/icons": ["@tabler/icons@3.50.0", "", {}, "sha512-HflLxyrH1cqC7s7jzQGSjpsTAVIoaf7+/yHjbdM59rJQBMjliibp+LYhDPFxOMcwa1M8DNpOk6ENzQiWn9a1Dg=="],
 
-    "@tabler/icons-react": ["@tabler/icons-react@3.45.0", "https://npm.flatt.tech/@tabler/icons-react/-/icons-react-3.45.0.tgz", { "dependencies": { "@tabler/icons": "3.45.0" }, "peerDependencies": { "react": ">= 16" } }, "sha512-t/AuKs7ALMDDTY+B9IvfZnlO0mbLlP/lJxP/HnGC49QkM8mCsTN38kYyxjXxgrb1+TeK53ioVBJqIV7n/eysXQ=="],
+    "@tabler/icons-react": ["@tabler/icons-react@3.50.0", "", { "dependencies": { "@tabler/icons": "3.50.0" }, "peerDependencies": { "react": ">= 16" } }, "sha512-X9XhFbxAmSNimQ71VAd7opfd4z84x1pLrEbBT33VCIEsFs8zWVqdhh5r/Jyi/3iJjQ861kE5Wm9ixiJfS2nwBA=="],
 
     "@tybys/wasm-util": ["@tybys/wasm-util@0.10.3", "https://npm.flatt.tech/@tybys/wasm-util/-/wasm-util-0.10.3.tgz", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-F3fo1MYrRJYL3zER0OUOmkutjr1Vp23m7OsSgp7nq4SP6OqX6C/56XFIPAl5bt3zaBRjmW7SGz3u/6LwFpYcOg=="],
 
