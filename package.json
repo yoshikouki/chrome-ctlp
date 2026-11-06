@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tabler/icons-react": "^3.45.0",
+    "@tabler/icons-react": "^3.50.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
